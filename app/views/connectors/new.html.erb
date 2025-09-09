@@ -1,0 +1,41 @@
+<h1>DataWorks Connector</h1>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<% if flash[:alert] %>
+  <p class="alert"><%= flash[:alert] %></p>
+<% end %>
+
+<%= form_tag connectors_path, method: :post do %>
+  <div>
+    <%= label_tag :dataworks_connector_project_name, "Project Name" %>
+    <%= text_field_tag :dataworks_connector_project_name, params[:dataworks_connector_project_name] %>
+  </div>
+
+  <div>
+    <%= label_tag :dataworks_connector_access_id, "Access ID" %>
+    <%= text_field_tag :dataworks_connector_access_id, params[:dataworks_connector_access_id] %>
+  </div>
+
+  <div>
+    <%= label_tag :dataworks_connector_access_secret, "Access Secret" %>
+    <%= password_field_tag :dataworks_connector_access_secret, params[:dataworks_connector_access_secret] %>
+  </div>
+
+  <div>
+    <%= label_tag :dataworks_connector_endpoint, "Endpoint" %>
+    <%= text_field_tag :dataworks_connector_endpoint, params[:dataworks_connector_endpoint] %>
+  </div>
+
+  <%= submit_tag "Connect to DataWorks" %>
+<% end %>
+
+<% if defined?(@tables) && @tables.present? %>
+  <h2>Tables</h2>
+  <ul>
+    <% @tables.each do |t| %>
+      <li><%= t %></li>
+    <% end %>
+  </ul>
+<% end %>
